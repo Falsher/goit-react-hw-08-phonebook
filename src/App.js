@@ -15,6 +15,11 @@ class App extends Component {
     ],
     filter: '',
   };
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parse = JSON.parse(contacts);
+    this.setState({ contacts: parse });
+  }
   formSubmit = (name, number) => {
     const nameContact = {
       id: shortid.generate(),
@@ -39,11 +44,7 @@ class App extends Component {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
-  componentDidMount() {
-    const contacts = localStorage.getItem('contacts');
-    const parse = JSON.parse(contacts);
-    this.setState({ contacts: parse });
-  }
+
   render() {
     const filterContact = this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(this.state.filter.toLowerCase()),
