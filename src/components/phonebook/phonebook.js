@@ -1,63 +1,59 @@
-import React, { Component } from 'react';
-import shortid from 'shortid';
+import { useState } from 'react';
+
 import './css/phonebook.css';
-class Phonebook extends Component {
-  state = {
-    textName: '',
-    number: '',
+export default function Phonebook({ onSubmit }) {
+  const [textName, setTextName] = useState('');
+  const [number, setNumber] = useState('');
+
+  const hadleInputChange = e => {
+    setTextName(e.currentTarget.value);
   };
-  nameInputId = shortid.generate();
-  hadleInputChange = e => {
-    this.setState({ textName: e.currentTarget.value });
-  };
-  hadleInputNumber = e => {
-    this.setState({ number: e.currentTarget.value });
+  const hadleInputNumber = e => {
+    setNumber(e.currentTarget.value);
   };
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state.textName, this.state.number);
-    this.reset();
+    onSubmit(textName, number);
+    reset();
   };
-  reset = () => {
-    this.setState({ textName: '' });
-    this.setState({ number: '' });
+  const reset = () => {
+    setTextName('');
+    setNumber('');
   };
-  render() {
-    return (
-      <form className="formFilling" onSubmit={this.handleSubmit}>
-        <label>
-          Name
-          <input
-            className="inputContact"
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-            required
-            value={this.state.textName}
-            onChange={this.hadleInputChange}
-          />
-        </label>
-        <label>
-          Number phone
-          <input
-            className="inputContact"
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-            required
-            value={this.state.number}
-            onChange={this.hadleInputNumber}
-          />
-        </label>
 
-        <button className="buttonAdd" type="submit">
-          Add contact
-        </button>
-      </form>
-    );
-  }
+  return (
+    <form className="formFilling" onSubmit={handleSubmit}>
+      <label>
+        Name
+        <input
+          className="inputContact"
+          type="text"
+          name="name"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+          required
+          value={textName}
+          onChange={hadleInputChange}
+        />
+      </label>
+      <label>
+        Number phone
+        <input
+          className="inputContact"
+          type="tel"
+          name="number"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+          required
+          value={number}
+          onChange={hadleInputNumber}
+        />
+      </label>
+
+      <button className="buttonAdd" type="submit">
+        Add contact
+      </button>
+    </form>
+  );
 }
-export default Phonebook;
