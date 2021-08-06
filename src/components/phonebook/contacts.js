@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './css/contacts.css';
 
-const Contacts = ({ ContactsData, onDeleteContact }) => {
+function Contacts({ ContactsData, onDeleteContact }) {
   return (
     <ul className="contacts">
       {ContactsData.map(({ name, number, id }) => (
@@ -14,7 +14,7 @@ const Contacts = ({ ContactsData, onDeleteContact }) => {
       ))}
     </ul>
   );
-};
+}
 Contacts.propTypes = {
   name: PropTypes.string,
   number: PropTypes.number,

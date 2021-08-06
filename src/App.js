@@ -5,7 +5,7 @@ import Phonebook from './components/phonebook/phonebook';
 import Contacts from './components/phonebook/contacts';
 import Filter from './components/phonebook/filter';
 import './components/phonebook/css/contacts.css';
-const App = () => {
+function App() {
   const [contacts, setContacts] = useState([
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
     { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -67,5 +67,5 @@ const App = () => {
       <Filter value={filter} onChange={changeFilter} />
     </Container>
   );
-};
+}
 export default App;
