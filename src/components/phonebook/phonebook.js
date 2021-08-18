@@ -1,7 +1,8 @@
-import { useState } from 'react';
-
+import { useState, useContext } from 'react';
+import { ContactsContext } from '../../App';
 import './css/phonebook.css';
-export default function Phonebook({ onSubmit }) {
+export default function Phonebook() {
+  const { formSubmit } = useContext(ContactsContext);
   const [textName, setTextName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -14,7 +15,7 @@ export default function Phonebook({ onSubmit }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit(textName, number);
+    formSubmit(textName, number);
     reset();
   };
   const reset = () => {

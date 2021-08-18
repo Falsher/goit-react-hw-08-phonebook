@@ -1,15 +1,17 @@
-import React from 'react';
+import { React, useContext } from 'react';
 import PropTypes from 'prop-types';
 import './css/contacts.css';
+import { ContactsContext } from '../../App';
+function Contacts() {
+  const { deleteContacts, filterContact } = useContext(ContactsContext);
 
-function Contacts({ ContactsData, onDeleteContact }) {
   return (
     <ul className="contacts">
-      {ContactsData.map(({ name, number, id }) => (
+      {filterContact.map(({ name, number, id }) => (
         <li className="contacts-items" key={id}>
           <span className="contacts-name">{name}</span>
           <span className="contacts-number">{number}</span>
-          <button onClick={() => onDeleteContact(id)}>Delete</button>
+          <button onClick={() => deleteContacts(id)}>Delete</button>
         </li>
       ))}
     </ul>

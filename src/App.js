@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, createContext } from 'react';
 import shortid from 'shortid';
 import Container from './components/phonebook/container';
 import Phonebook from './components/phonebook/phonebook';
 import Contacts from './components/phonebook/contacts';
 import Filter from './components/phonebook/filter';
 import './components/phonebook/css/contacts.css';
+export const ContactsContext = createContext();
 function App() {
   const [contacts, setContacts] = useState([
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -56,16 +57,23 @@ function App() {
     contact.name.toLowerCase().includes(filter.toLowerCase()),
   );
   return (
-    <Container>
-      <Phonebook onSubmit={formSubmit} />
-      <div className="contactsDiv">
-        <Contacts
-          ContactsData={filterContact}
-          onDeleteContact={deleteContacts}
-        />
-      </div>
-      <Filter value={filter} onChange={changeFilter} />
-    </Container>
+    <ContactsContext.Provider
+      value={{
+        formSubmit,
+        deleteContacts,
+        filterContact,
+        filter,
+        changeFilter,
+      }}
+    >
+      <Container>
+        <Phonebook />
+        <div className="contactsDiv">
+          <Contacts />
+        </div>
+        <Filter />
+      </Container>
+    </ContactsContext.Provider>
   );
 }
 export default App;
