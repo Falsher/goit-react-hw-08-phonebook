@@ -1,24 +1,32 @@
-import { React, useContext } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+// import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import actions from '../../redux/action';
 import './css/contacts.css';
-import { ContactsContext } from '../../App';
-function Contacts() {
-  const { deleteContacts, filterContact } = useContext(ContactsContext);
 
+function Contacts({ ContactsData, onDeleteContact }) {
   return (
     <ul className="contacts">
-      {filterContact.map(({ name, number, id }) => (
+      {ContactsData.map(({ name, number, id }) => (
         <li className="contacts-items" key={id}>
           <span className="contacts-name">{name}</span>
           <span className="contacts-number">{number}</span>
-          <button onClick={() => deleteContacts(id)}>Delete</button>
+          <button onClick={() => onDeleteContact(id)}>Delete</button>
         </li>
       ))}
     </ul>
   );
 }
-Contacts.propTypes = {
-  name: PropTypes.string,
-  number: PropTypes.number,
+const getStateToProps = (contacts, filter) => {
+  return contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase()),
+  );
 };
-export default Contacts;
+
+const mapStateToProps = ({ contacts: { items, filter } }) => ({
+  ContactsData: getStateToProps(items, filter),
+});
+const mapDispatchtoProps = dispatch => ({
+  onDeleteContact: id => dispatch(actions.deleteContacts(id)),
+});
+export default connect(mapStateToProps, mapDispatchtoProps)(Contacts);

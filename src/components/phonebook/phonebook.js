@@ -1,8 +1,9 @@
-import { useState, useContext } from 'react';
-import { ContactsContext } from '../../App';
+import { useState } from 'react';
+import { connect } from 'react-redux';
+import actions from '../../redux/action';
+
 import './css/phonebook.css';
-export default function Phonebook() {
-  const { formSubmit } = useContext(ContactsContext);
+function Phonebook({ formSubmit }) {
   const [textName, setTextName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -58,3 +59,8 @@ export default function Phonebook() {
     </form>
   );
 }
+
+const mapDispatchtoProps = dispatch => ({
+  formSubmit: (name, number) => dispatch(actions.formSubmit(name, number)),
+});
+export default connect(null, mapDispatchtoProps)(Phonebook);
