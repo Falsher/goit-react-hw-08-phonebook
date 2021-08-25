@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import actions from '../../redux/action';
+import operations from '../../redux/operations';
 
 import './css/phonebook.css';
 function Phonebook({ formSubmit }) {
@@ -61,6 +61,6 @@ function Phonebook({ formSubmit }) {
 }
 
 const mapDispatchtoProps = dispatch => ({
-  formSubmit: (name, number) => dispatch(actions.formSubmit(name, number)),
+  formSubmit: (name, number) => dispatch(operations.formSubmit(name, number)),
 });
 export default connect(null, mapDispatchtoProps)(Phonebook);

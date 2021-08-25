@@ -1,18 +1,15 @@
+import { useEffect } from 'react';
 import Container from './components/phonebook/container';
 import Phonebook from './components/phonebook/phonebook';
 import Contacts from './components/phonebook/contacts';
 import Filter from './components/phonebook/filter';
 import './components/phonebook/css/contacts.css';
-function App() {
-  // useEffect(() => {
-  //   const contactsData = JSON.parse(localStorage.getItem('contacts'));
-  //   if (contactsData) setContacts(contactsData);
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
-
+import { connect } from 'react-redux';
+import operations from './redux/operations';
+function App({ fetchContacts }) {
+  useEffect(() => {
+    fetchContacts();
+  }, [fetchContacts]);
   return (
     <Container>
       <Phonebook />
@@ -23,4 +20,7 @@ function App() {
     </Container>
   );
 }
-export default App;
+const mapDispatchToProps = dispatch => ({
+  fetchContacts: () => dispatch(operations.fetchContacts()),
+});
+export default connect(null, mapDispatchToProps)(App);

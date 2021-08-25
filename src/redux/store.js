@@ -1,12 +1,5 @@
-// import { combineReducers } from 'redux';s
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import {
-  configureStore,
-  getDefaultMiddleware,
-  combineReducers,
-} from '@reduxjs/toolkit';
-import {
-  persistStore,
-  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -14,15 +7,10 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+
 import logger from 'redux-logger';
 import reducerContact from './reducer';
 
-const persistConfig = {
-  key: 'root',
-  storage,
-};
-// console.log(getDefaultMiddleware());
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
@@ -31,19 +19,11 @@ const middleware = [
   }),
   logger,
 ];
-// const rootReducer = combineReducers({
-//   contacts: reducerContact,
-// });
-// const store = createStore(rootReducer, composeWithDevTools());
-const rootReducer = combineReducers({
-  contacts: reducerContact,
-});
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: { contacts: reducerContact },
   middleware,
   devTools: process.env.NODE_ENV === 'development',
 });
-const persistor = persistStore(store);
-// eslint-disable-next-line import/no-anonymous-default-export
-export default { store, persistor };
+
+export default store;

@@ -1,0 +1,37 @@
+{
+  "contacts": [
+    {
+      "id": "id-3",
+      "name": "Eden Clements",
+      "number": "645-17-79"
+    },
+    {
+      "id": "id-4",
+      "name": "Annie Copeland",
+      "number": "227-91-26"
+    },
+    {
+      "name": "Захаров Иван Михайлович",
+      "number": "06721785",
+      "completed": false,
+      "id": "G1Z-6Jb"
+    },
+    {
+      "name": "ssddsd",
+      "number": "06721785",
+      "completed": false,
+      "id": "0XLwNs0"
+    },
+    {
+      "name": "Захаров Иван Михайлович",
+      "number": "06721785",
+      "completed": false,
+      "id": "h96Lz33"
+    },
+    {
+      "name": "Захаров Иван Михайлович",
+      "number": "06721785",
+      "id": "7wjrm9B"
+    }
+  ]
+}
