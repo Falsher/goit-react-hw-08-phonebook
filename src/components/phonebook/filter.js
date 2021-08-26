@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { filterContacts } from '../../redux/action';
+import selectors from '../../redux/selectors';
 import './css/filter.css';
 function Filter({ value, onChange }) {
   return (
@@ -13,7 +14,7 @@ function Filter({ value, onChange }) {
   );
 }
 const mapStateToProps = state => ({
-  value: state.contacts.filter,
+  value: selectors.getFilter(state),
 });
 const mapDispatchtoProps = dispatch => ({
   onChange: events => dispatch(filterContacts(events.target.value)),

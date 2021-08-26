@@ -2,6 +2,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import operations from '../../redux/operations';
+import selectors from '../../redux/selectors';
 import './css/contacts.css';
 
 function Contacts({ ContactsData, onDeleteContact }) {
@@ -17,14 +18,9 @@ function Contacts({ ContactsData, onDeleteContact }) {
     </ul>
   );
 }
-const getStateToProps = (contacts, filter) => {
-  return contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase()),
-  );
-};
 
-const mapStateToProps = ({ contacts: { items, filter } }) => ({
-  ContactsData: getStateToProps(items, filter),
+const mapStateToProps = state => ({
+  ContactsData: selectors.getVisibleContacts(state),
 });
 const mapDispatchtoProps = dispatch => ({
   onDeleteContact: id => dispatch(operations.deleteContacts(id)),
