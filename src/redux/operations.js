@@ -19,10 +19,6 @@ const fetchContacts = () => async dispatch => {
   } catch (error) {
     dispatch(fetchSubmitError(error));
   }
-  // axios
-  //   .get('/contacts')
-  //   .then(({ data }) => dispatch(fetchSubmitSuccess(data)))
-  //   .catch(error => dispatch(fetchSubmitError(error)));
 };
 
 const formSubmit = (name, number) => dispatch => {
