@@ -10,7 +10,7 @@ import {
   fetchSubmitSuccess,
   fetchSubmitError,
 } from './action';
-axios.defaults.baseURL = 'http://localhost:4040';
+
 const fetchContacts = () => async dispatch => {
   dispatch(fetchSubmitRequest());
   const { data } = await axios.get('/contacts');
