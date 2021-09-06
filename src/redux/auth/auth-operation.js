@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { registerRequest, registerSuccess, registerError } from './auth-action';
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -10,17 +10,44 @@ const token = {
     axios.defaults.headers.common.Authorization = '';
   },
 };
-
-const register = credentials => async dispatch => {
-  dispatch(registerRequest());
+const register = createAsyncThunk('auth/register', async credentials => {
   try {
-    const { data } = await axios.post(`users/signup`, credentials);
+    const { data } = await axios.post('/users/signup', credentials);
     token.set(data.token);
-    dispatch(registerSuccess(data));
+    return data;
   } catch (error) {
-    dispatch(registerError(error));
+    return error;
   }
-};
-
+});
+const logIn = createAsyncThunk('auth/login', async credentials => {
+  try {
+    const { data } = await axios.post('/users/login', credentials);
+    token.set(data.token);
+    return data;
+  } catch (error) {
+    return;
+  }
+});
+const logOut = createAsyncThunk('auth/logout', async () => {
+  try {
+    await axios.post('/users/logout');
+    token.unset();
+  } catch (error) {}
+});
+const fetchCurrentUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue();
+    }
+    token.set(persistedToken);
+    try {
+      const { data } = await axios.get('/users/current');
+      return data;
+    } catch (error) {}
+  },
+);
 // eslint-disable-next-line import/no-anonymous-default-export
-export default register;
+export default { register, logIn, logOut, fetchCurrentUser };

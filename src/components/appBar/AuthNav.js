@@ -1,11 +1,9 @@
 import { NavLink } from 'react-router-dom';
+
 import '../css/link.css';
 export default function AppBar() {
   return (
-    <nav>
-      <NavLink to="/" exact className="link" activeClassName="activeLink">
-        HomePage
-      </NavLink>
+    <>
       <NavLink
         to="/register"
         exact
@@ -17,14 +15,6 @@ export default function AppBar() {
       <NavLink to="/login" exact className="link" activeClassName="activeLink">
         Login
       </NavLink>
-      <NavLink
-        to="/contacts"
-        exact
-        className="link"
-        activeClassName="activeLink"
-      >
-        Contacts
-      </NavLink>
-    </nav>
+    </>
   );
 }
