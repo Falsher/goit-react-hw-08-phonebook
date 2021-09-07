@@ -36,7 +36,7 @@ function App() {
               <PublicRoute path="/Login" restricted>
                 <Login />
               </PublicRoute>
-              <PrivateRoute path="/Contacts">
+              <PrivateRoute path="/Contacts" redirectTo="/Contacts">
                 <Contacts />
               </PrivateRoute>
             </Switch>
