@@ -19,27 +19,31 @@ function App() {
     dispatch(authOperation.fetchCurrentUser());
   }, [dispatch]);
   return (
-    !isFetchingLoad && (
-      <div className="App">
-        <AppBar />
-        <Suspense fallback={<div>Loading...</div>}>
-          <Switch>
-            <PublicRoute path="/" exact>
-              <HomePages />
-            </PublicRoute>
-            <PublicRoute path="/Register" restricted>
-              <Register />
-            </PublicRoute>
-            <PublicRoute path="/Login" restricted>
-              <Login />
-            </PublicRoute>
-            <PrivateRoute path="/Contacts">
-              <Contacts />
-            </PrivateRoute>
-          </Switch>
-        </Suspense>
-      </div>
-    )
+    <div className="App">
+      {isFetchingLoad ? (
+        <h1>какая-то страница</h1>
+      ) : (
+        <>
+          <AppBar />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              <PublicRoute path="/" exact>
+                <HomePages />
+              </PublicRoute>
+              <PublicRoute path="/Register" restricted>
+                <Register />
+              </PublicRoute>
+              <PublicRoute path="/Login" restricted>
+                <Login />
+              </PublicRoute>
+              <PrivateRoute path="/Contacts">
+                <Contacts />
+              </PrivateRoute>
+            </Switch>
+          </Suspense>
+        </>
+      )}
+    </div>
   );
 }
 
