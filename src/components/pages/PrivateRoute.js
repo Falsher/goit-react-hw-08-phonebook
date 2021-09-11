@@ -7,10 +7,10 @@ export default function PrivateRoute({
   redirectTo = '/',
   ...routeProps
 }) {
-  const isLoggeIn = useSelector(authSelectors.getIsLoggedIn);
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   return (
     <Route {...routeProps}>
-      {isLoggeIn ? children : <Redirect to={redirectTo} />}
+      {isLoggedIn ? children : <Redirect to={redirectTo} />}
     </Route>
   );
 }

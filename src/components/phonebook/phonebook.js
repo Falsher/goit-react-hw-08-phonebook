@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import operations from '../../redux/operations';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/phonebook.css';
 function Phonebook({ formSubmit }) {
   const [textName, setTextName] = useState('');
@@ -25,11 +25,11 @@ function Phonebook({ formSubmit }) {
   };
 
   return (
-    <form className="formFilling" onSubmit={handleSubmit}>
-      <label>
+    <form className="formFilling " onSubmit={handleSubmit}>
+      <label class="form-label">
         Name
         <input
-          className="inputContact"
+          class="form-control"
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -39,10 +39,10 @@ function Phonebook({ formSubmit }) {
           onChange={hadleInputChange}
         />
       </label>
-      <label>
+      <label class="form-text form-label">
         Number phone
         <input
-          className="inputContact"
+          class="form-control"
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -53,7 +53,7 @@ function Phonebook({ formSubmit }) {
         />
       </label>
 
-      <button className="buttonAdd" type="submit">
+      <button class="btn btn-primary" type="submit">
         Add contact
       </button>
     </form>

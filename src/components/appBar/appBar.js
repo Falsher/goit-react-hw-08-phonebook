@@ -3,12 +3,17 @@ import { useSelector } from 'react-redux';
 import UserMenu from './userMenu';
 import authSelectors from '../../redux/auth/auth-selectors';
 import AuthNav from '../appBar/AuthNav';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 export default function AppBar() {
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   return (
-    <nav>
-      <NavLink to="/" exact className="link" activeClassName="activeLink">
+    <nav class="alert alert-primary">
+      <NavLink
+        to="/"
+        exact
+        className="breadcrumb-item"
+        activeClassName="active"
+      >
         HomePage
       </NavLink>
       {isLoggedIn ? (
@@ -17,8 +22,8 @@ export default function AppBar() {
           <NavLink
             to="/contacts"
             exact
-            className="link"
-            activeClassName="activeLink"
+            className="breadcrumb-item"
+            activeClassName="active"
           >
             Contacts
           </NavLink>

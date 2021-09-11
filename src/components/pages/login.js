@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import authOperations from '../../redux/auth/auth-operation';
+import 'bootstrap/dist/css/bootstrap.min.css';
 export default function Login() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
@@ -23,28 +24,32 @@ export default function Login() {
   };
   return (
     <>
-      <form className="login" onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            className="inputContact"
-            type="email"
-            name="email"
-            required
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Password
-          <input
-            className="inputContact"
-            type="password"
-            name="password"
-            required
-            onChange={handleChange}
-          />
-        </label>
-        <button className="buttonAdd" type="submit">
+      <form onSubmit={handleSubmit}>
+        <div class="form-group">
+          <label>
+            Email
+            <input
+              class="form-control"
+              type="email"
+              name="email"
+              required
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            Password
+            <input
+              class="form-control"
+              type="password"
+              name="password"
+              required
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <button class="btn btn-success" type="submit">
           Login
         </button>
       </form>

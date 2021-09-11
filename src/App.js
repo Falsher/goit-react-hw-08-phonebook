@@ -7,6 +7,7 @@ import PublicRoute from './components/pages/PublicRoute';
 import authOperation from 'redux/auth/auth-operation';
 import AppBar from './components/appBar/appBar';
 import authSelectors from 'redux/auth/auth-selectors';
+import 'bootstrap/dist/css/bootstrap.min.css';
 const HomePages = lazy(() => import('./components/pages/homeP'));
 const Register = lazy(() => import('./components/pages/register'));
 const Login = lazy(() => import('./components/pages/login'));
@@ -19,7 +20,7 @@ function App() {
     dispatch(authOperation.fetchCurrentUser());
   }, [dispatch]);
   return (
-    <div className="App">
+    <div class="card">
       {isFetchingLoad ? (
         <h1>какая-то страница</h1>
       ) : (
@@ -30,13 +31,18 @@ function App() {
               <PublicRoute path="/" exact>
                 <HomePages />
               </PublicRoute>
-              <PublicRoute path="/Register" restricted>
+              <PublicRoute exact path="/register" restricted>
                 <Register />
               </PublicRoute>
-              <PublicRoute path="/Login" redirectTo="/Login" restricted>
+              <PublicRoute
+                exact
+                path="/login"
+                redirectTo="/contacts"
+                restricted
+              >
                 <Login />
               </PublicRoute>
-              <PrivateRoute path="/Contacts" redirectTo="/Contacts">
+              <PrivateRoute path="/contacts" redirectTo="/login">
                 <Contacts />
               </PrivateRoute>
             </Switch>

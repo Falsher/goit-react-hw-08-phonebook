@@ -3,16 +3,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import operations from '../../redux/operations';
 import selectors from '../../redux/selectors';
-import './css/contacts.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Contacts({ ContactsData, onDeleteContact }) {
   return (
-    <ul className="contacts">
+    <ul className="contacts alert alert-success">
       {ContactsData.map(({ name, number, id }) => (
         <li className="contacts-items" key={id}>
           <span className="contacts-name">{name}</span>
           <span className="contacts-number">{number}</span>
-          <button onClick={() => onDeleteContact(id)}>Delete</button>
+          <button class="btn btn-danger" onClick={() => onDeleteContact(id)}>
+            Delete
+          </button>
         </li>
       ))}
     </ul>

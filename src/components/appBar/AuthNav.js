@@ -1,18 +1,23 @@
 import { NavLink } from 'react-router-dom';
-
-import '../css/link.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 export default function AppBar() {
   return (
     <>
       <NavLink
         to="/register"
         exact
-        className="link"
-        activeClassName="activeLink"
+        className="breadcrumb-item"
+        activeClassName="active"
       >
         Register
       </NavLink>
-      <NavLink to="/login" exact className="link" activeClassName="activeLink">
+      <NavLink
+        to="/login"
+        exact
+        className="breadcrumb-item"
+        activeClassName="active"
+      >
         Login
       </NavLink>
     </>
